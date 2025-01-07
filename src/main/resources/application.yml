@@ -5,9 +5,11 @@ server:
 
 spring:
   datasource:
-    password:
-    url: jdbc:postgresql://localhost:5432/registration
-    username:
+    password: 9LYeb4pL0vu2L33cgIvB
+    url: jdbc:postgresql://database-1.c1uuq6cosz0q.ap-south-1.rds.amazonaws.com:5432/postgres
+    username: postgres
+    driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -20,18 +22,17 @@ spring:
   mail:
     host: localhost
     port: 1025
-    username: hello
-    password: hello
-
+    # Optional: Remove username and password if not needed for local servers
+    username: hello  # Optional for local servers
+    password: hello  # Optional for local servers
     properties:
       mail:
         smtp:
           ssl:
             trust: "*"
-          auth: true
+          auth: false  # Disable authentication for local servers
           starttls:
             enable: true
-          connectiontimeout: 5000
-          timeout: 3000
-          writetimeout: 5000
-
+          connectiontimeout: 10000  # Increased timeout
+          timeout: 10000  # Increased timeout
+          writetimeout: 10000  # Increased timeout

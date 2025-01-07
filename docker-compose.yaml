@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  registration:
+    image: registration:latest
+    container_name: registration
+    ports:
+      - "8080:8080" # Map container port 8080 to host port 8080
+    depends_on:
+      - mailhog # Ensure MailHog is started before registration
+    environment:
+      SPRING_MAIL_HOST: mailhog
+      SPRING_MAIL_PORT: 1025
+    networks:
+      - app-network
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: mailhog
+    ports:
+      - "8025:8025" # Web UI
+      - "1025:1025" # SMTP server
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
